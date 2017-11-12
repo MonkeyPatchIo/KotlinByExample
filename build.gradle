@@ -1,0 +1,47 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+group 'io.monkeypatch.talks'
+
+buildscript {
+    ext {
+        kotlin_version = '1.2.0-rc-39'
+        retrofit_version = '2.3.0'
+        jackson_version = '2.9.2'
+        springBoot_version = '2.0.0.M6'
+        kotlinx_html_version = '0.6.6'
+        junit_version = '5.0.1'
+        junit_platform_version = '1.0.1'
+        kluent_version = '1.30'
+    }
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+        maven { url "https://mvnrepository.com/artifact" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+        maven { url "https://mvnrepository.com/artifact" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

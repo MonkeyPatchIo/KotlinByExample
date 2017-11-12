@@ -1,0 +1,10 @@
+.gradle/
+build/
+
+*.iml
+.idea/
+.vscode/
+
+node_modules/
+yarn.lock
+*.log

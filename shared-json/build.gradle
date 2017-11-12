@@ -1,0 +1,21 @@
+apply plugin: 'kotlin-platform-jvm'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+dependencies {
+    expectedBy project(":shared")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
+    }
+}

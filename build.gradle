@@ -4,9 +4,9 @@ group 'io.monkeypatch.talks'
 buildscript {
     ext {
         kotlin_version = '1.2.50'
-        springBoot_version = '2.0.3.RELEASE'
         jackson_version = '2.9.6'
         junit_platform_version = '1.2.0'
+        retrofit_version = '2.3.0'
 
 //        proxy_repo = 'http://localhost:7000/maven'
         proxy_repo = 'http://192.168.0.42:7000/maven'
@@ -23,12 +23,8 @@ buildscript {
         maven { url proxy_repo }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBoot_version"
-        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
-        classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
-        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

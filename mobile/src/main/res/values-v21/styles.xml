@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:navigationBarColor">@color/navigationBarColor</item>
+    </style>
+
+
+    <style name="AppTheme.Button.Colored" parent="AppTheme.Button.Colored.Base">
+        <item name="android:colorButtonNormal">#2196f3</item>
+    </style>
+</resources>

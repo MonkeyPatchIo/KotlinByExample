@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:propertyName="pathData"
+    android:valueFrom="M 180.414 484.993 L 180.481 486.383 L 52.195 486.399 L 50.638 483.369 L 180.414 484.993 Z"
+    android:valueTo="M 227.457 115.762 L 180.481 486.383 L 52.195 486.399 L 8.518 115.779 L 227.457 115.762 Z"
+    android:valueType="pathType"
+    android:interpolator="@android:interpolator/accelerate_quad"/>

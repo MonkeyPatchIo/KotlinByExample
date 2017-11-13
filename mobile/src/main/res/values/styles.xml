@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Base.AppTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme"/>
+
+    <style name="AppTheme.Button.Colored.Base" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Button.Colored" parent="AppTheme.Button.Colored.Base">
+        <item name="colorButtonNormal">#2196f3</item>
+    </style>
+
+</resources>

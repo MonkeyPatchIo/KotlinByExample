@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/solve
+Content-Type: application/json
+
+{
+  "first": [
+    { "capacity": 5, "current": 0},
+    { "capacity": 3, "current": 0}
+  ],
+  "second": [
+    { "capacity": 5, "current": 1},
+    { "capacity": 3, "current": 0}
+  ]
+}

@@ -1,0 +1,112 @@
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	font-family: sans-serif;
+}
+
+/*buttons*/
+.main button {
+	font-size: 1.25em;
+	border-radius: 2.5em;
+	border: medium solid currentColor;
+	color: #e2b65e;
+	padding: .25em .5em;
+	background-color: #fff;
+	outline: currentColor 1px;
+}
+
+/*inputs*/
+input[type=number] {
+	width: 4ch;
+	margin: 0 1ch;
+}
+
+/*main and layout */
+.main {
+	display: grid;
+	grid-gap: .5em;
+	grid-template-columns: 1fr 1fr;
+	margin: .5em;
+}
+
+.main h1, .main .btn-solve, .main .error, .main ul {
+	grid-column: 1 / 3;
+}
+
+.main h1 {
+	text-align: center;
+}
+
+.main .error {
+	font-size: 1.25em;
+	background-color: firebrick;
+	color: white;
+	padding: .25em 1em;
+	white-space: pre;
+	overflow: auto;
+}
+
+.error:empty {
+	display: none;
+}
+
+/*State*/
+.state {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.state.initial {
+	box-shadow: .5rem 0 0 rgba(0, 0, 0, .25);
+}
+
+/*glass container*/
+.glass-container {
+	display: flex;
+	flex-direction: column;
+	margin: 1em;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+/*Glass*/
+.glass {
+	width: 3em;
+	margin-top: 2.5em;
+	margin-bottom: .5em;
+	display: inline-block;
+	color: lightblue;
+	background-color: currentColor;
+	border: medium solid currentColor;
+	border-bottom-width: .8em;
+	border-top: none;
+	border-radius: .25em;
+	transform: perspective(.5em) rotateX(-1deg) scaleY(.8);
+	transform-origin: bottom;
+	box-shadow: .125em .125em 0.25em rgba(0, 0, 0, .5),
+	inset .625em .25em 2.5em hsla(1, 100%, 100%, .9);
+}
+
+/*solve list*/
+.main ul {
+	list-style: none;
+	padding: 0;
+}
+
+.main ul li {
+	display: grid;
+	grid-gap: .5em;
+	grid-template-columns: 1fr 1fr;
+	border: thin solid rgba(0, 0, 0, .25);
+	margin: .25em 0;
+	padding: .25em;
+}
+
+/*move*/
+.move {
+	align-self: center;
+	justify-self: center;
+	font-size: 1.5em;
+}

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WaterPouring</string>
+
+    <string name="avd_res_name_path">path</string>
+    <string name="avd_res_name_shape">shape</string>
+    <string name="result">Result</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="solve">Solve</string>
+    <string name="play">Play 1x</string>
+    <string name="initialState">Initial State</string>
+    <string name="no_solution">There is no solution, you should try something like 5,6 / 9,2 </string>
+    <string name="waiting">Waiting</string>
+</resources>

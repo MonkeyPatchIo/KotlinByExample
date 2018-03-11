@@ -61,8 +61,31 @@ class TailRecursiveSolver : Solver {
      * @throws IllegalStateException if no solution found
      */
     override fun solve(from: State, to: State): List<Move> {
-        TODO("2.7")
-    }
+        // auxiliary function
+        fun aux(statesWithHistory: Collection<StateWithHistory>, visitedStates: Set<State>): List<Move> {
+            // end of recursion
+            val solution = findSolution(statesWithHistory, to)
+            if (solution != null) {
+                return solution
+            }
 
+            // next state (remove already known state)
+            val nextStates = nextStatesFromCollection(statesWithHistory)
+                .filterNot { (state, _) -> visitedStates.contains(state) }
+
+            // all visited states
+            val nextVisited = allVisitedStates(visitedStates, nextStates)
+
+            // check for infinite loop
+            if (nextVisited == visitedStates) {
+                throw IllegalStateException("No solution found, got $visitedStates")
+            }
+
+            // recursion
+            return aux(nextStates, nextVisited)
+        }
+
+        return aux(listOf(from to emptyList()), setOf(from))
+    }
 
 }

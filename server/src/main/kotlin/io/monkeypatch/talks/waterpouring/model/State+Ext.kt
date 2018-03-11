@@ -44,7 +44,16 @@ fun State.availableMoves(): Collection<Move> {
  */
 fun State.process(move: Move): State =
     this.mapIndexed { index, glass ->
-        TODO("2.3")
+        when (move) {
+            is Empty -> if (index == move.index) glass.empty() else glass
+            is Fill  -> if (index == move.index) glass.fill() else glass
+            is Pour  ->
+                when (index) {
+                    move.from -> glass - this[move.to].capacity
+                    move.to   -> glass + this[move.from].current
+                    else      -> glass
+                }
+        }
     }
 
 

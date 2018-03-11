@@ -18,7 +18,8 @@ class TailRecursiveSolver : Solver {
      * @return a list of [Move] or null if not found
      */
     internal fun findSolution(statesWithHistory: Collection<StateWithHistory>, expected: State): List<Move>? =
-        TODO("2.1")
+        statesWithHistory.find { (state, _) -> state == expected }
+            ?.second
 
     /**
      * Computes next [State]s

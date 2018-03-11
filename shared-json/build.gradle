@@ -1,11 +1,6 @@
 apply plugin: 'kotlin-platform-jvm'
 
 buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.2" }
-    }
-
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }

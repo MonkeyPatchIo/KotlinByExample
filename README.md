@@ -1,38 +1,38 @@
 Kotlin by Example
 ===
 
-Requirements
+Pré-requis
 ---
 
 ### JDK 8
   
-<!> build does not work with JDK 9 :'(
+<!> le build ne fonctione pas avec JDK 9 :'(
 
-To install JDK, or switch version you can use [SDKMAN!](http://sdkman.io/)
+Pour installer le JDK , ou changer rapidement de version vous pouvez utilisez [SDKMAN!](http://sdkman.io/)
   
-### Your preferred IDE
+### Votre IDE préféré
  
-[Android Studio](https://developer.android.com/studio/index.html) required for android exercises
+[Android Studio](https://developer.android.com/studio/index.html) nécessaire pour l'exercice Android
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
-[Eclipse](http://www.eclipse.org/) is also supported, [see](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html)
+[Eclipse](http://www.eclipse.org/) est aussi supporté officielment, [voir](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html)
 
 <https://kotlinlang.org/docs/reference/faq.html#what-ides-support-kotlin>
 
-### Specific requirement for Android part
+### Pré-requis pour la partie Android
 
-[Android Studio](https://developer.android.com/studio/index.html) required for android exercises
+[Android Studio](https://developer.android.com/studio/index.html) requis pour l'exercide Android, version > 3.0
 
 Android SDK version `27`
 
-You can configure the Android SDK directory by creating a `local.properties` like that:
+Vous pouvez configurer le répertoire du SDK Android en créant un fichier `local.properties` comme ceci :
 
 ```properties
 sdk.dir=/path/to/Android/sdk
 ```
 
-Water Pouring Puzzle
+Water Pouring Puzzle (Problème de transvasement)
 ---
 
 [Water Pouring Puzzle](https://en.wikipedia.org/wiki/Water_pouring_puzzle)
@@ -40,51 +40,52 @@ Water Pouring Puzzle
 Build
 ---
 
-Run in project root:
+Lancer à la racine du projet :
 
 ```bash
 ./gradlew clean assemble
 
 ```
 
-First build require an Internet connection, and could be long (lots of downloads)
+La première construction nécessite une connection Internet, et peut prendre pas mal de temps (beaucoup de téléchargement)
 
-Test
+Tests
 ---
 
-Run in project root:
+Lancer à la racine du projet :
 
 ```bash
 ./gradlew test
 
 ```
 
-Run
+Lancement
 ---
 
 ### Server
 
-If the server has been built successfully you can start the server with
+Si le serveur à bien été construit, vous pouvez le lancer avec :
 
 ```bash
-java -jar server/build/libs/server.jar
+java -jar lib/build/libs/server.jar
 ```
 
-Then open your browser at <http://localhost:8080/>
+Ensuite ouvrez votre navigateur sur <http://localhost:8080/>
 
-Some solvable examples
+Quelques exemples avec une solution
 ---
 
-+ 0/5, 0/3 to 4/5, 0/3
-+ 0/8, 0/5 to 6/8, 0/5
-+ 0/7, 0/5 to 4/7, 0/5
-+ 0/9, 0/4 to 6/9, 0/4
-+ 0/11, 0/3 to 7/11, 0/3
-+ 0/11, 0/7) to 2/11, 0/7
-+ 12/12, 0/8, 0/5 to 6/12, 6/8, 0/5
-+ 0/24, 0/13, 0/11, 0/5 to 6/24, 6/13, 6/11, 0
+0/5, 0/3 vers 4/5, 0/3
+0/8, 0/5 vers 6/8, 0/5
+0/7, 0/5 vers 4/7, 0/5
+0/9, 0/4 vers 6/9, 0/4
+0/11, 0/3 vers 7/11, 0/3
+0/11, 0/7) vers 2/11, 0/7
 
-REST API
+12/12, 0/8, 0/5 vers 6/12, 6/8, 0/5
+0/24, 0/13, 0/11, 0/5 vers 6/24, 6/13, 6/11, 0
+
+API REST
 ---
 
 ```
@@ -103,7 +104,7 @@ Content-Type: application/json
 }
 ```
 
-Response if OK:
+Si c'est OK, la réponse est:
 
 ```json
 [
@@ -119,46 +120,46 @@ Response if OK:
 ]
 ```
 
-Or an error `4xx` if there is an issue, the body contains a textual description of issue.
+Ou une erreur `4xx` sera retourné en cas d'erreur, le corps de la réponse contiendra une description sommaire du problème.
 
-Content
+Contenu
 ---
 
 ```bash
 .
-├── gradle: gradle wrapper directory
-├── mobile: the android sub-project (see below)
-├── server: the server sub-project (see below)
-├── shared: the shared sub-project (see below)
-├── shared-json: the shared-json sub-project (see below)
-├── web: the web sub-project (see below) 
-├── README.md: this file
-├── build.gradle: gradle build
-├── settings.gradle: gradle setting
-├── gradle.properties: some gradle properties
-├── gradlew: run the gradle wrapper on GNU/Linux or OSX
-└── gradlew.bat: run the gradle wrapper on Windows
+├── gradle: le répertoire du wrapper gralde
+├── mobile: le sous projet android (voir ci-dessous)
+├── server: le sous-project server (voir ci-dessous)
+├── shared: le sous-project shared (voir ci-dessous)
+├── shared-json: le sous-project shared-json (voir ci-dessous)
+├── web: le sous-project web (voir ci-dessous)
+├── README_fr.md: ce fichier
+├── build.gradle: la configuration du build gradle
+├── settings.gradle: la configuration de gradle
+├── gradle.properties: la configuration des propriétés de gradle
+├── gradlew: lance le wrapper gradle sur GNU/Linux ou OSX
+└── gradlew.bat: lance le wrapper gradle sur Windows
 ```
 
 ### shared
 
-The shared code between over part.
+Le code partagé entre les autres partie.
 
-Containing the definition of `Glass`, `State`.
+Contient la définition de `Glass`, `State`.
 
 ### shared-json
 
-The shared code for Jackson serialization/deserialization.
-Used by mobile and server
+Le code partagé pour la serialization/deserialization de Jackson.
+Ce code est utilisé par la partie mobile et la partie serveur.
 
 ### mobile (Android)
 
-Home of the Android exercise
+Racine de l'exercice Android.
 
-### server (Spring Boot 2.0)
+### server (SpringBoot 2.0)
 
-Home of the SpringBoot exercise.
+Racine de l'exercice SpringBoot.
 
 ### Web (browser)
 
-Home of the Web exercise.
+Racine des exercices Android, Serveur, Web.

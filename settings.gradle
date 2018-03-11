@@ -1,4 +1,1 @@
 include ':shared', ':shared-json'
-include ':server'
-// include ':web'
-//include ':mobile'

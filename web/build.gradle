@@ -1,0 +1,88 @@
+buildscript {
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+    }
+}
+
+apply plugin: 'kotlin-platform-js'
+apply plugin: 'kotlin-dce-js'
+apply plugin: 'com.moowork.node'
+
+node {
+    download = true
+    version = '8.11.3'
+    // distBaseUrl = proxy_repo
+}
+
+dependencies {
+    // Common
+    expectedBy project(":shared")
+
+    //
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+
+    // Kotlin React
+    compile "org.jetbrains:kotlin-extensions:$kotlin_extensions_version"
+    compile "org.jetbrains:kotlin-react:$kotlin_react_version"
+    compile "org.jetbrains:kotlin-react-dom:$kotlin_react_version"
+
+    // Kotlin HTML DSL
+    compile "org.jetbrains.kotlinx:kotlinx-html-js:$kotlinx_html_version"
+
+    // Test
+    testCompile "org.jetbrains.kotlin:kotlin-test-js"
+    testCompile "org.jetbrains:kotlin-mocha:$kotlin_mocha_version"
+}
+
+compileKotlin2Js.configure {
+    kotlinOptions {
+        sourceMap = true
+        sourceMapEmbedSources = "always"
+        moduleKind = "umd"
+        metaInfo = true
+    }
+}
+
+compileTestKotlin2Js.configure {
+    kotlinOptions {
+        sourceMap = true
+        sourceMapEmbedSources = "always"
+        moduleKind = "umd"
+        metaInfo = true
+    }
+}
+
+// Assemble
+task buildBundle(type: Exec, dependsOn: [yarn_install, runDceKotlinJs]) {
+    inputs.file("yarn.lock")
+    inputs.file("webpack.config.js")
+    inputs.dir("src/main")
+
+    outputs.dir("$buildDir/web")
+
+    commandLine "$projectDir/node_modules/.bin/webpack"
+}
+
+assemble.dependsOn buildBundle
+
+// Test
+
+runDceTestKotlinJs.dceOptions.devMode = true
+
+task buildTestBundle(type: Exec, dependsOn: [yarn_install, buildBundle, runDceTestKotlinJs]) {
+    inputs.file("yarn.lock")
+    inputs.file("webpack.test.config.js")
+    inputs.dir("src/main")
+    inputs.dir("src/test")
+
+    outputs.dir("$buildDir/web-test")
+
+    commandLine "$projectDir/node_modules/.bin/webpack", "--config", "$projectDir/webpack.test.config.js"
+}
+
+task runTestInNode(type: Exec, dependsOn: [yarn_install, runDceTestKotlinJs, buildTestBundle]) {
+    commandLine "$projectDir/node_modules/.bin/mocha", "--require", "$projectDir/src/test/js/requirements.js", "$projectDir/build/web-test/bundle-test.js"
+}
+
+test.dependsOn runTestInNode

@@ -1,0 +1,9 @@
+{
+  "minCapacity": 1,
+  "maxCapacity": 12,
+  "url": "/api/solve",
+  "debug": false,
+  "host": "main",
+  "initial": "0/5, 0/3",
+  "final": "4/5, 0/3"
+}

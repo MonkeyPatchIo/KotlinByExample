@@ -8,6 +8,14 @@ buildscript {
         jackson_version = '2.9.6'
         junit_platform_version = '1.2.0'
 
+        kotlinx_html_version = '0.6.9'
+        junit_version = '5.0.1'
+        kluent_version = '1.30'
+        // Web
+        kotlin_react_version = '16.4.0-pre.32-kotlin-1.2.41'
+        kotlin_extensions_version = '1.0.1-pre.32-kotlin-1.2.41'
+        kotlin_mocha_version = '3.0.1-pre.32-kotlin-1.2.41'
+
 //        proxy_repo = 'http://localhost:7000/maven'
         proxy_repo = 'http://192.168.0.42:7000/maven'
     }
@@ -23,9 +31,7 @@ buildscript {
         maven { url proxy_repo }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBoot_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
         classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
@@ -44,6 +50,7 @@ allprojects {
             mavenCentral()
             maven { url "https://mvnrepository.com/artifact" }
             maven { url "https://repo.spring.io/milestone" }
+            maven { url "https://plugins.gradle.org/m2/" }
 
             maven { url proxy_repo }
         }
@@ -55,7 +62,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://mvnrepository.com/artifact" }
-        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://kotlin.bintray.com/kotlin-js-wrappers" }
 
         maven { url proxy_repo }
     }

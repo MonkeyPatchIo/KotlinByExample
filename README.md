@@ -1,4 +1,4 @@
-Kotlin by Example
+Kotlin par l'exemple
 ===
 
 Pré-requis

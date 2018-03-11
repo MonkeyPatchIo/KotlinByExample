@@ -23,11 +23,11 @@ internal fun applicationRoutes(solver: Solver,
         }
 
         // Solve the water pouring problem
-        // TODO 3.4
         POST("/api/solve") { request ->
             val input = request.bodyToMono<Pair<State, State>>()
             val result = input.map { (from, to) -> solver.solve(from, to) }
-            ServerResponse.ok().body(result)
+            val resultWithTimeout = applyTimeout(result, timeout)
+            ServerResponse.ok().body(resultWithTimeout)
         }
 
         // Serve static files
@@ -43,4 +43,4 @@ internal fun applicationRoutes(solver: Solver,
  * @return the result as [Mono] or a failure [timeout] exceeded
  */
 internal fun <T> applyTimeout(mono: Mono<T>, timeout: Duration): Mono<T> =
-    TODO("3.4")
+    mono.timeout(timeout)

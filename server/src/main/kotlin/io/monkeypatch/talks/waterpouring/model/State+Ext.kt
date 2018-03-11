@@ -49,7 +49,7 @@ fun State.process(move: Move): State =
             is Fill  -> if (index == move.index) glass.fill() else glass
             is Pour  ->
                 when (index) {
-                    move.from -> glass - this[move.to].capacity
+                    move.from -> glass - this[move.to].remainingVolume()
                     move.to   -> glass + this[move.from].current
                     else      -> glass
                 }

@@ -43,7 +43,7 @@ fun Glass.empty(): Glass =
  * @return a filled [Glass]
  */
 fun Glass.fill(): Glass =
-    TODO("1.5")
+    copy(current = capacity)
 
 /**
  * Remove content to the [Glass].

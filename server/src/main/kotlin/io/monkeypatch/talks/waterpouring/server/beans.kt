@@ -2,9 +2,12 @@ package io.monkeypatch.talks.waterpouring.server
 
 import com.fasterxml.jackson.databind.Module
 import io.monkeypatch.talks.waterpouring.model.moveModule
+import io.monkeypatch.talks.waterpouring.server.service.Solver
+import io.monkeypatch.talks.waterpouring.server.service.TailRecursiveSolver
 import io.monkeypatch.talks.waterpouring.server.utils.ApplicationWebExceptionHandler
 import io.monkeypatch.talks.waterpouring.server.utils.CorsWebFilter
 import io.monkeypatch.talks.waterpouring.server.utils.ExceptionResponseMapper
+import io.monkeypatch.talks.waterpouring.server.utils.seconds
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler
 import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
@@ -34,7 +37,9 @@ internal val beans: BeanDefinitionDsl =
         }
 
         // Solver service
-        // TODO 3.1
+        bean<Solver> {
+            TailRecursiveSolver()
+        }
 
         // Routes
         bean {
@@ -51,7 +56,7 @@ internal val beans: BeanDefinitionDsl =
  * @param env the Spring environment
  */
 internal fun getConfigurationTimeout(env: ConfigurableEnvironment): Duration =
-    TODO("3.1")
+    env.getProperty("solver.timeout.in.seconds", Int::class.java, 1).seconds
 
 /**
  * Return the [ExceptionResponseMapper] (alias for [(Throwable) -> Pair<HttpStatus, String>?]) used by

@@ -1,11 +1,10 @@
 package io.monkeypatch.talks.waterpouring.server
 
+import io.monkeypatch.talks.waterpouring.model.State
 import io.monkeypatch.talks.waterpouring.server.service.Solver
 import org.springframework.core.io.ClassPathResource
-import org.springframework.web.reactive.function.server.RouterFunction
-import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.*
 import org.springframework.web.reactive.function.server.ServerResponse.permanentRedirect
-import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Mono
 import java.net.URI
 import java.time.Duration
@@ -24,8 +23,12 @@ internal fun applicationRoutes(solver: Solver,
         }
 
         // Solve the water pouring problem
-        // TODO 3.2
         // TODO 3.4
+        POST("/api/solve") { request ->
+            val input = request.bodyToMono<Pair<State, State>>()
+            val result = input.map { (from, to) -> solver.solve(from, to) }
+            ServerResponse.ok().body(result)
+        }
 
         // Serve static files
         resources("/**", ClassPathResource("static/"))

@@ -33,7 +33,7 @@ fun Glass.remainingVolume(): Int =
  * @return a empty [Glass]
  */
 fun Glass.empty(): Glass =
-    TODO("1.4")
+    copy(current = 0)
 
 /**
  * Fill a [Glass].

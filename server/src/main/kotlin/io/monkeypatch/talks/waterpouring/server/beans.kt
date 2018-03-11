@@ -12,8 +12,12 @@ import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler
 import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 import org.springframework.core.env.ConfigurableEnvironment
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.BAD_REQUEST
+import org.springframework.http.HttpStatus.REQUEST_TIMEOUT
 import org.springframework.web.server.WebFilter
 import java.time.Duration
+import java.util.concurrent.TimeoutException
 
 /**
  * Define injectable beans
@@ -65,6 +69,10 @@ internal fun getConfigurationTimeout(env: ConfigurableEnvironment): Duration =
  * @return a function that can provide a [Pair] of [HttpStatus] and [String] when we could map the exception
  */
 internal fun exceptionResponseMapper(): ExceptionResponseMapper = { error ->
-    TODO("3.3")
+    when (error) {
+        is IllegalStateException -> BAD_REQUEST to (error.message ?: "Oops !")
+        is TimeoutException      -> REQUEST_TIMEOUT to (error.message ?: "Oops timeout !")
+        else                     -> null
+    }
 }
 

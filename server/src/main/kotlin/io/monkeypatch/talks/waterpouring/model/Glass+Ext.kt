@@ -53,8 +53,8 @@ fun Glass.fill(): Glass =
  *
  * @return the new [Glass]
  */
-/* TODO 1.6 */ fun Glass.minus(value: Int): Glass =
-    TODO("1.6")
+operator fun Glass.minus(value: Int): Glass =
+    copy(current = (current - value).coerceAtLeast(0))
 
 /**
  * Add some content to the [Glass].

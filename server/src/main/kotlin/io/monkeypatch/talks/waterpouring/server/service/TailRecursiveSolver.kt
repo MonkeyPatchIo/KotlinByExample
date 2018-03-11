@@ -50,7 +50,7 @@ class TailRecursiveSolver : Solver {
      * @return set of all visited [State]s, including the new ones
      */
     internal fun allVisitedStates(visitedStates: Set<State>, newlyStates: List<StateWithHistory>): Set<State> =
-        TODO("2.6")
+        visitedStates + newlyStates.map { it.first }
 
     /**
      * Solve Water Pouring Puzzle

@@ -1,5 +1,7 @@
 package components
 
+import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.onClickFunction
 import model.Configuration
 import model.UiState
 import react.RBuilder
@@ -12,6 +14,7 @@ import react.dom.div
 import react.dom.h1
 import react.dom.ul
 import react.setState
+import redux.RemoveGlassAction
 import store.Store
 
 
@@ -79,11 +82,11 @@ class MainComponent(props: MainProps) : RComponent<MainProps, MainState>(props) 
             h1 { +"Kotlin par l'exemple" }
             button(classes = "btn-add") {
                 +"Ajouter un verre"
-                TODO("3.2")
+//                TODO("3.2")
             }
             button(classes = "btn-remove") {
                 +"Supprimer un verre"
-                TODO("3.1")
+                attrs.onClickFunction = { _ -> props.onRemoveGlass() }
             }
             div(classes = "state initial") {
                 initialState(state = state.uiState.initialState,
@@ -98,7 +101,7 @@ class MainComponent(props: MainProps) : RComponent<MainProps, MainState>(props) 
             }
             button(classes = "btn-solve") {
                 +"Résoudre"
-                TODO("4.1")
+//                TODO("4.1")
             }
             div(classes = "error") {
                 +(state.uiState.error ?: "")
@@ -121,13 +124,13 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
         attrs.maxCapacity = config.maxCapacity
 
         // actions
-        attrs.onRemoveGlass = TODO("3.1")
-        attrs.onAddGlass = TODO("3.2")
+        attrs.onRemoveGlass = { store.dispatch(RemoveGlassAction) }
+//        attrs.onAddGlass = TODO("3.2")
 
-        attrs.onFinalCurrentChange = TODO("3.3")
+//        attrs.onFinalCurrentChange = TODO("3.3")
 
-        attrs.onInitialCurrentChange = TODO("3.4")
-        attrs.onInitialCapacityChange = TODO("3.5")
+//        attrs.onInitialCurrentChange = TODO("3.4")
+//        attrs.onInitialCapacityChange = TODO("3.5")
 
-        attrs.onSolve = TODO("4.1")
+//        attrs.onSolve = TODO("4.1")
     }

@@ -22,7 +22,8 @@ data class UiState(
      * the first item of the [List] does not contains a [Move], just the initial [State]
      */
     val solutionList: List<Pair<Move?, State>> by lazy {
-        TODO("4.5")
+//        TODO("4.5")
+        emptyList<Pair<Move?, State>>()
     }
 
 }

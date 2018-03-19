@@ -19,6 +19,7 @@ import redux.AddGlassAction
 import redux.RemoveGlassAction
 import redux.SetGlassCapacity
 import redux.SetGlassCurrent
+import redux.SolveAction
 import store.Store
 
 
@@ -105,7 +106,7 @@ class MainComponent(props: MainProps) : RComponent<MainProps, MainState>(props) 
             }
             button(classes = "btn-solve") {
                 +"Résoudre"
-//                TODO("4.1")
+                attrs.onClickFunction = { _ -> props.onSolve() }
             }
             div(classes = "error") {
                 +(state.uiState.error ?: "")
@@ -157,5 +158,9 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
             store.dispatch(SetGlassCapacity(index to capacity))
         }
 
-//        attrs.onSolve = TODO("4.1")
+        attrs.onSolve = {
+            val initial = store.state.initialState
+            val final = store.state.finalState
+            store.dispatch(SolveAction(initial to final))
+        }
     }

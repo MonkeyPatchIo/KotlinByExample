@@ -1,5 +1,6 @@
 import components.mainContainer
 import helpers.getJson
+import helpers.postJson
 import model.Configuration
 import model.UiState
 import react.dom.render
@@ -40,7 +41,7 @@ private fun bootstrapApplication(config: Configuration) {
     // Create the store
     val effect = solveEffect(config.url) { url, body ->
         // POST to url to get a Array<SolveMove>
-        TODO("4.3")
+        postJson(url, body)
     }
     val appStore = Store.create(uiState, createReducer(), effect)
 

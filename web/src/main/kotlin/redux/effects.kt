@@ -43,9 +43,14 @@ typealias Solver = (String, Pair<State, State>) -> Promise<Array<SolveMove>>
  */
 fun solveEffect(solverUrl: String, solver: Solver): Effect = { action ->
     when (action) {
-        is SolveAction -> TODO("4.3")
-    // then transform to a List<Move>,
-    // return the success or the failure action
+        is SolveAction -> solver(solverUrl, action.payload)
+            // then transform to a List<Move>,
+            .then { it.map { it.asMove() }.toList() }
+            // return the success or the failure action
+            .then(
+                {moves -> SolveActionSuccess(moves)},
+                {err -> SolveActionError(err)}
+            )
         else           -> Promise.resolve(null as Action<*>?)
     }
 }

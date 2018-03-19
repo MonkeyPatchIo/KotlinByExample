@@ -29,7 +29,8 @@ fun Glass.empty(): Glass =
  *
  * @return a filled [Glass]
  */
-fun Glass.fill(): Glass = TODO("1.3")
+fun Glass.fill(): Glass =
+    copy(current = capacity)
 
 /**
  * Compute fill percentage

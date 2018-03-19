@@ -22,8 +22,11 @@ data class UiState(
      * the first item of the [List] does not contains a [Move], just the initial [State]
      */
     val solutionList: List<Pair<Move?, State>> by lazy {
-//        TODO("4.5")
-        emptyList<Pair<Move?, State>>()
+        val seed = listOf<Pair<Move?, State>>(null to initialState)
+        solution.fold(seed) { acc, move ->
+            val (_, state) = acc.last()
+            acc + (move to (state.move(move)))
+        }
     }
 
 }

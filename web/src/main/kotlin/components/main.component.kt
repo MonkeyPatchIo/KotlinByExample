@@ -17,6 +17,7 @@ import react.dom.ul
 import react.setState
 import redux.AddGlassAction
 import redux.RemoveGlassAction
+import redux.SetGlassCurrent
 import store.Store
 
 
@@ -134,7 +135,14 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
             store.dispatch(AddGlassAction(glass))
         }
 
-//        attrs.onFinalCurrentChange = TODO("3.3")
+        attrs.onFinalCurrentChange = { index, current ->
+            store.dispatch(
+                SetGlassCurrent(
+                    isInitialState = false,
+                    glassIndex = index,
+                    newCurrentValue = current
+                ))
+        }
 
 //        attrs.onInitialCurrentChange = TODO("3.4")
 //        attrs.onInitialCapacityChange = TODO("3.5")

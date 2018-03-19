@@ -2,6 +2,8 @@ package components
 
 import io.monkeypatch.talks.waterpouring.model.State
 import kotlinx.html.InputType.number
+import kotlinx.html.js.onChangeFunction
+import org.w3c.dom.HTMLInputElement
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -41,13 +43,19 @@ class FinalStateComponent : RComponent<FinalStateProps, RState>() {
                         min = "0"
                         value = "${glass.current}"
                         max = "${glass.capacity}"
+                        onChangeFunction = { event ->
+                            val newCurrent = (event.target as? HTMLInputElement)
+                                ?.value
+                                ?.toInt()
+                                    ?: throw IllegalStateException("Expected an input")
+                            props.onFinalCurrentChange(index, newCurrent)
+                        }
                     }
                 }
                 span { +"/" }
                 span(classes = "capacity") { +"${glass.capacity}" }
             }
         }
-//        TODO("3.3: changer la valeur courante dans l'état final")
     }
 }
 

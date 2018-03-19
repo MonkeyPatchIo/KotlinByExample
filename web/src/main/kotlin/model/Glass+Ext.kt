@@ -59,4 +59,5 @@ operator fun Glass.minus(value: Int): Glass =
  *
  * @return the new [Glass]
  */
-/* TODO("1.6") */fun Glass.plus(value: Int): Glass = TODO("1.6")
+operator fun Glass.plus(value: Int): Glass =
+    copy(current = (current + value).coerceAtMost(capacity))

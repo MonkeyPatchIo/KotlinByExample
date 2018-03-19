@@ -21,7 +21,15 @@ interface SolveMove {
  *
  * @return the [Move] corresponding
  */
-fun SolveMove.asMove(): Move = TODO("4.2")
+fun SolveMove.asMove(): Move =
+        when(type) {
+            "Empty" -> Empty(index?: throw IllegalArgumentException("Expected an index"))
+            "Fill" -> Fill(index?: throw IllegalArgumentException("Expected an index"))
+            "Pour" -> Pour (
+                from = from?:throw IllegalArgumentException("Expected an from"),
+                to = to?:throw IllegalArgumentException("Expected an to"))
+               else -> throw IllegalArgumentException("Unsupported type: $type")
+        }
 
 /**
  * A solver should take an URL, and a [Pair] of [State] (first: initial, second: final),

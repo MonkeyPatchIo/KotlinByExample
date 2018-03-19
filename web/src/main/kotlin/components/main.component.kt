@@ -17,6 +17,7 @@ import react.dom.ul
 import react.setState
 import redux.AddGlassAction
 import redux.RemoveGlassAction
+import redux.SetGlassCapacity
 import redux.SetGlassCurrent
 import store.Store
 
@@ -152,7 +153,9 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
                     newCurrentValue = current
                 ))
         }
-//        attrs.onInitialCapacityChange = TODO("3.5")
+        attrs.onInitialCapacityChange = { index, capacity ->
+            store.dispatch(SetGlassCapacity(index to capacity))
+        }
 
 //        attrs.onSolve = TODO("4.1")
     }

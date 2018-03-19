@@ -62,11 +62,17 @@ class InitialStateComponent : RComponent<InitialStateProps, RState>() {
                         min = "${props.minCapacity}"
                         value = "${glass.capacity}"
                         max = "${props.maxCapacity}"
+                        onChangeFunction = { event ->
+                            val newCapacity = (event.target as? HTMLInputElement)
+                                ?.value
+                                ?.toInt()
+                                    ?: throw IllegalStateException("Expected an input")
+                            props.onInitialCapacityChange(index, newCapacity)
+                        }
                     }
                 }
             }
         }
-//        TODO("3.5: changer la capacité dans l'état initial")
     }
 }
 

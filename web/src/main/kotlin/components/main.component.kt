@@ -144,7 +144,14 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
                 ))
         }
 
-//        attrs.onInitialCurrentChange = TODO("3.4")
+        attrs.onInitialCurrentChange = { index, current ->
+            store.dispatch(
+                SetGlassCurrent(
+                    isInitialState = true,
+                    glassIndex = index,
+                    newCurrentValue = current
+                ))
+        }
 //        attrs.onInitialCapacityChange = TODO("3.5")
 
 //        attrs.onSolve = TODO("4.1")

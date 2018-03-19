@@ -2,6 +2,8 @@ package components
 
 import io.monkeypatch.talks.waterpouring.model.State
 import kotlinx.html.InputType
+import kotlinx.html.js.onChangeFunction
+import org.w3c.dom.HTMLInputElement
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -45,6 +47,13 @@ class InitialStateComponent : RComponent<InitialStateProps, RState>() {
                         min = "0"
                         value = "${glass.current}"
                         max = "${glass.capacity}"
+                        onChangeFunction = { event ->
+                            val newCurrent = (event.target as? HTMLInputElement)
+                                ?.value
+                                ?.toInt()
+                                    ?: throw IllegalStateException("Expected an input")
+                            props.onInitialCurrentChange(index, newCurrent)
+                        }
                     }
                 }
                 span { +"/" }
@@ -57,7 +66,6 @@ class InitialStateComponent : RComponent<InitialStateProps, RState>() {
                 }
             }
         }
-//        TODO("3.4: changer la valeur courante dans l'état initial")
 //        TODO("3.5: changer la capacité dans l'état initial")
     }
 }

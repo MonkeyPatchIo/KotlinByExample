@@ -37,7 +37,8 @@ fun Glass.fill(): Glass =
  *
  * @return fill percentage
  */
-fun Glass.fillPercent(): Double = TODO("1.4")
+fun Glass.fillPercent(): Double =
+    current.toDouble() / capacity * 100
 
 /**
  * Remove content to the [Glass].

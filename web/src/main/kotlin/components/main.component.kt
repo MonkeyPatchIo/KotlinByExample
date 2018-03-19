@@ -1,6 +1,7 @@
 package components
 
-import kotlinx.html.js.onChangeFunction
+import helpers.random
+import io.monkeypatch.talks.waterpouring.model.Glass
 import kotlinx.html.js.onClickFunction
 import model.Configuration
 import model.UiState
@@ -14,6 +15,7 @@ import react.dom.div
 import react.dom.h1
 import react.dom.ul
 import react.setState
+import redux.AddGlassAction
 import redux.RemoveGlassAction
 import store.Store
 
@@ -82,7 +84,7 @@ class MainComponent(props: MainProps) : RComponent<MainProps, MainState>(props) 
             h1 { +"Kotlin par l'exemple" }
             button(classes = "btn-add") {
                 +"Ajouter un verre"
-//                TODO("3.2")
+                attrs.onClickFunction = { _ -> props.onAddGlass() }
             }
             button(classes = "btn-remove") {
                 +"Supprimer un verre"
@@ -125,7 +127,12 @@ fun RBuilder.mainContainer(config: Configuration, store: Store<UiState>): ReactE
 
         // actions
         attrs.onRemoveGlass = { store.dispatch(RemoveGlassAction) }
-//        attrs.onAddGlass = TODO("3.2")
+        attrs.onAddGlass = {
+            val capacity = (config.minCapacity..config.maxCapacity).random()
+            val current = (0..capacity).random()
+            val glass = Glass(current = current, capacity = capacity)
+            store.dispatch(AddGlassAction(glass))
+        }
 
 //        attrs.onFinalCurrentChange = TODO("3.3")
 

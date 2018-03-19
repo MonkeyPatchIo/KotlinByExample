@@ -9,7 +9,8 @@ import io.monkeypatch.talks.waterpouring.model.Glass
  *
  * @return remaining volume
  */
-fun Glass.remainingVolume(): Int = TODO("1.1")
+fun Glass.remainingVolume(): Int =
+    capacity - current
 
 /**
  * Empty a [Glass].

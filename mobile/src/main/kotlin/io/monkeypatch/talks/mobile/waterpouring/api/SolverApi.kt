@@ -46,10 +46,15 @@ object SolverApi {
 
         // Build retrofit instance
 
-        val retrofit: Retrofit = TODO("2.1")
+        val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl(Configuration.url)
+                .addConverterFactory(JacksonConverterFactory.create(waterPouringMapper))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(httpClient.build())
+                .build()
 
         // Create SolverInterface instance with retrofit
-        TODO("2.1")
+        retrofit.create(SolverInterface::class.java)
     }
 
 

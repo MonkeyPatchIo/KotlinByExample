@@ -80,7 +80,7 @@ class MainViewModel : OnGlassEvent {
 
 
     private fun bindView(position: GlassPosition, glassLayout: GlassLayout) {
-        layouts.put(position, glassLayout)
+        layouts[position] = glassLayout
         glassLayout.onGlassEvent = this
         glassLayout.glassPosition = position
         glassLayout.glassChanged(position.toGlass())
@@ -92,17 +92,17 @@ class MainViewModel : OnGlassEvent {
 
     override fun onClick(glassPosition: GlassPosition) {
         val previous = glassPosition.toGlass()
-        // FIXME update glass
-        val current =  TODO("3.4 : Compute new Current")
+        val current =  (previous.current + 1) % (previous.capacity + 1)
         setGlass(glassPosition, previous.copy(current = current))
     }
 
     override fun onDoubleClick(glassPosition: GlassPosition) {
         val previous = glassPosition.toGlass()
 
-        val newCapacity = TODO("3.5 : Compute new Capacity")
+        val newCapacity = ((previous.capacity + 1) % (Configuration.maxCapacity + 1))
+                .coerceAtLeast(Configuration.minCapacity)
+        val newCurrent = previous.current.coerceIn(Configuration.minCapacity..newCapacity)
 
-        val newCurrent =  TODO("3.5 : Compute new Current")
         setGlass(glassPosition, Glass(capacity = newCapacity, current = newCurrent))
     }
 
@@ -114,7 +114,15 @@ class MainViewModel : OnGlassEvent {
         val solution = result.toSolutionList(initialState)
 
         // Play Animations
-        val glassAnimations: Pair<GlassAnimation, GlassAnimation> = TODO("3.6 : transform the solution into a Pair<GlassAnimation, GlassAnimation>")
+        val glassAnimations: Pair<GlassAnimation, GlassAnimation> = solution.asSequence()
+                // A state can only have 2 glass in that context
+                .filter { it.second.size == 2 }
+                .map { (_, states) ->
+                    // precondition: a state has only 2 glass in that case
+                    val (firstGlass, secondGlass) = states
+                    Pair(firstGlass.current, firstGlass.filled()) to Pair(secondGlass.current, secondGlass.filled())
+                }
+                .unzip()
 
         val moves: List<Move?> = solution.map { it.first }
 

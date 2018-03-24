@@ -67,12 +67,10 @@ class MainActivity : AppCompatActivity() {
         moves.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
-                    // FIXME hide progress
                     progressBar.visibility = View.VISIBLE
                     textViewError.text = getString(R.string.waiting)
                 }
                 .doOnEvent { _, _ ->
-                    // FIXME hide progress
                     progressBar.visibility = View.GONE
                 }
                 .subscribe(
@@ -100,7 +98,6 @@ class MainActivity : AppCompatActivity() {
      * Display a message when there is no solution.
      */
     private fun displaySolution() {
-        // FIXME update display
         textViewError.visibility = View.GONE
         resultGroup.visibility = View.VISIBLE
         val (glass1, glass2) = mainModel.initialState
@@ -112,8 +109,8 @@ class MainActivity : AppCompatActivity() {
      * Display a message when there is no solution.
      */
     private fun displayNoSolution(text: String?) {
-        // FIXME update display
         textViewError.visibility = View.VISIBLE
+        resultGroup.visibility = View.GONE
         textViewError.text = text
     }
 }

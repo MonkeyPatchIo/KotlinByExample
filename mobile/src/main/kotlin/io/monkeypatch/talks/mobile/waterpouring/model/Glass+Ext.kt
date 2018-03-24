@@ -9,21 +9,24 @@ import io.monkeypatch.talks.waterpouring.model.Glass
  *
  * @return remaining volume
  */
-fun Glass.remainingVolume(): Int = TODO("1.1")
+fun Glass.remainingVolume(): Int =
+        capacity - current
 
 /**
  * Compute the percentage filled
  *
  * @return the percentage filled of a [Glass]
  */
-fun Glass.filled(): Float = TODO("1.2")
+fun Glass.filled(): Float =
+        current.toFloat() / capacity
 
 /**
  * Compute the percentage between glass capacity and max glass capacity
  *
  * @return the percentage filled of a [Glass]
  */
-fun Glass.sized(): Float = TODO("1.3")
+fun Glass.sized(): Float =
+        capacity / Configuration.maxCapacity.toFloat()
 
 /**
  * Empty a [Glass].
@@ -32,7 +35,8 @@ fun Glass.sized(): Float = TODO("1.3")
  *
  * @return a empty [Glass]
  */
-fun Glass.empty(): Glass = TODO("1.4")
+fun Glass.empty(): Glass =
+        copy(current = 0)
 
 /**
  * Fill a [Glass].
@@ -41,7 +45,8 @@ fun Glass.empty(): Glass = TODO("1.4")
  *
  * @return a filled [Glass]
  */
-fun Glass.fill(): Glass = TODO("1.5")
+fun Glass.fill(): Glass =
+        copy(current = capacity)
 
 /**
  * Remove content to the [Glass].
@@ -51,7 +56,8 @@ fun Glass.fill(): Glass = TODO("1.5")
  *
  * @return the new [Glass]
  */
-fun Glass.minus(value: Int): Glass = TODO("1.6")
+operator fun Glass.minus(value: Int): Glass =
+        copy(current = (current - value).coerceAtLeast(0))
 
 /**
  * Add some content to the [Glass].
@@ -61,7 +67,8 @@ fun Glass.minus(value: Int): Glass = TODO("1.6")
  *
  * @return the new [Glass]
  */
-fun Glass.plus(value: Int): Glass = TODO("1.7")
+operator fun Glass.plus(value: Int): Glass =
+        copy(current = (current + value).coerceAtMost(capacity))
 
 
 /**

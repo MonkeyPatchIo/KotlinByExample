@@ -10,10 +10,10 @@ object Configuration {
     var url: String = "http://10.0.2.2:8080"
 
     /** Glass min capacity */
-    val minCapacity = 2
+    const val minCapacity = 2
 
     /** Glass max capacity */
-    val maxCapacity = 9
+    const val maxCapacity = 9
 
     init {
         require(minCapacity < maxCapacity)

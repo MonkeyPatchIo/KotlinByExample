@@ -78,12 +78,12 @@ class GlassLayout : FrameLayout, GestureDetector.OnGestureListener, GestureDetec
 
     @SuppressLint("SetTextI18n")
     fun updateState(glass: Glass) {
-        levelView.text = TODO("3.1 : return \"glass current / glass capacity\" using string template")
-        glassView.setLevels(TODO("3.2 : use a function on glass to show the percentage filled"))
+        levelView.text = "${glass.current}/${glass.capacity}"
+        glassView.setLevels(glass.filled())
     }
 
     fun updateScale(glass: Glass) {
-        TODO("3.3 : Scale a glass using its sized value")
+        scale(glass.sized())
     }
 
     private fun scale(scale: Float) {
